@@ -1,5 +1,4 @@
-# app.py
-# This script runs the Streamlit web app with a city selection feature.
+# Streamlit web app
 
 import streamlit as st
 import pandas as pd
@@ -8,7 +7,6 @@ import joblib
 import plotly.express as px
 import os
 
-# --- Page Configuration ---
 st.set_page_config(
     page_title="AQI Forecasting Framework",
     page_icon="🔮",
@@ -117,4 +115,5 @@ with st.expander("See How the Forecast is Made"):
 # --- 4. CONTEXT (HISTORICAL DATA) ---
 st.header(f"Context: Historical AQI Trends for {selected_city}")
 fig_hist = px.line(city_df, x='Date', y='AQI', title=f'Historical AQI in {selected_city}')
+
 st.plotly_chart(fig_hist, use_container_width=True)
