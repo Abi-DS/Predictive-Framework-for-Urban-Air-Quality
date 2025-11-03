@@ -1,5 +1,5 @@
 # Streamlit web app
-
+from pathlib import Path
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -30,7 +30,9 @@ def get_aqi_category(aqi):
         return "Severe", "maroon"
 
 # --- Load Assets ---
-DATA_PATH = 'data/city_day.csv'
+SCRIPT_DIR = Path(__file__).parent 
+
+DATA_PATH = SCRIPT_DIR / "city_day.csv"
 MODEL_PATH = 'saved_model/xgb_model.pkl'
 
 @st.cache_data
@@ -117,3 +119,4 @@ st.header(f"Context: Historical AQI Trends for {selected_city}")
 fig_hist = px.line(city_df, x='Date', y='AQI', title=f'Historical AQI in {selected_city}')
 
 st.plotly_chart(fig_hist, use_container_width=True)
+
