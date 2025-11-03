@@ -6,7 +6,7 @@ import numpy as np
 import joblib
 import plotly.express as px
 import os
-
+SCRIPT_DIR = Path(__file__).parent
 st.set_page_config(
     page_title="AQI Forecasting Framework",
     page_icon="🔮",
@@ -30,9 +30,10 @@ def get_aqi_category(aqi):
         return "Severe", "maroon"
 
 # --- Load Assets ---
-SCRIPT_DIR = Path(__file__).parent 
+
 DATA_PATH = SCRIPT_DIR / "city_day.csv"
 MODEL_PATH = SCRIPT_DIR / "saved_model" / "xgb_model.pkl"
+
 @st.cache_data
 def load_data(path):
     # Load and clean data for ALL cities
@@ -117,5 +118,6 @@ st.header(f"Context: Historical AQI Trends for {selected_city}")
 fig_hist = px.line(city_df, x='Date', y='AQI', title=f'Historical AQI in {selected_city}')
 
 st.plotly_chart(fig_hist, use_container_width=True)
+
 
 
